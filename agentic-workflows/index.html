@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic workflows — what they are and whether your work fits</title>
+<meta name="description" content="What agentic workflows actually are, why they are not chatbots, and how to tell whether the work on your desk today could be handed over.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Agentic workflows — what they are and whether your work fits">
+<meta property="og:description" content="Your job already contains the instructions. You just never wrote them down.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agentic workflows — what they are and whether your work fits">
+<meta name="twitter:description" content="Your job already contains the instructions. You just never wrote them down.">
+<meta property="og:image" content="https://ivanrai-dev.github.io/ivanrai-dev-docs.github.io/agentic-workflows/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="634">
+<meta property="og:url" content="https://ivanrai-dev.github.io/ivanrai-dev-docs.github.io/agentic-workflows/">
+<meta name="twitter:image" content="https://ivanrai-dev.github.io/ivanrai-dev-docs.github.io/agentic-workflows/assets/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cs-black:#0B0609; --cs-navy:#2A1019; --cs-grey:#7A6A6E;
+  --cs-canvas:#100A0D; --cs-panel:#1B1014; --cs-panel-alt:#160C10;
+  --cs-border:rgba(255,255,255,0.07); --cs-border-solid:#3B2A30;
+  --cs-on-dark:#F6EFEC; --cs-on-dark-secondary:#CDBCB9; --cs-on-dark-muted:#A08D91;
+  --cs-viz-1:#8C2F4A; --cs-viz-2:#CF4257; --cs-viz-3:#C9902E; --cs-viz-4:#6E3352;
+  --cs-viz-5:#E2A3B2; --cs-viz-6:#F0949F; --cs-viz-7:#EBC27A; --cs-viz-8:#B98BA8;
+  --cs-brass:#C9902E; --cs-brass-l:#EBC27A;
+  --cs-teal:#2E9C93; --cs-teal-l:#7FD3CB; --cs-jade:#3FA98A;
+  --cs-gradient-neutral:linear-gradient(180deg,#3C1526 0%,#100A0D 100%);
+  --cs-font-display:'Urbanist','Poppins',system-ui,sans-serif;
+  --cs-font-body:'Inter',system-ui,-apple-system,sans-serif;
+  --cs-radius-sm:8px; --cs-radius:16px; --cs-radius-lg:24px;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--cs-canvas); color:var(--cs-on-dark);
+  font-family:var(--cs-font-body); -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--cs-font-display);font-weight:600;line-height:1.12;margin:0;}
+p{line-height:1.6;margin:0 0 16px;}
+a{color:var(--cs-viz-5);}
+
+.wrap{max-width:960px;margin:0 auto;padding:0 28px;}
+.eyebrow{
+  font-family:var(--cs-font-display);font-size:12px;font-weight:600;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--cs-on-dark-muted);
+}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;background:var(--cs-gradient-neutral);padding:88px 0 72px;}
+.hero::before{
+  content:"";position:absolute;right:-160px;top:-120px;width:520px;height:520px;
+  border-radius:50%;border:70px solid rgba(140,47,74,.10);
+}
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.hero .wrap{position:relative;z-index:2;}
+.hero h1{font-size:clamp(34px,5.4vw,62px);letter-spacing:-.02em;margin:14px 0 20px;max-width:19ch;}
+.hero .lede{font-size:18px;color:var(--cs-on-dark-secondary);max-width:62ch;}
+.hero .meta{margin-top:30px;font-size:13.5px;color:var(--cs-on-dark-muted);}
+
+/* ---------- sections ---------- */
+section{padding:62px 0;border-top:1px solid var(--cs-border);}
+section.station{
+  border-top:1px solid rgba(140,47,74,.28);
+  background:
+    linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px),
+    var(--cs-panel-alt);
+  background-size:64px 64px,64px 64px,auto;
+}
+.sec-head{margin-bottom:28px;}
+.sec-head h2{font-size:clamp(24px,3.4vw,36px);letter-spacing:-.01em;margin:10px 0 14px;}
+.sec-head p{color:var(--cs-on-dark-secondary);max-width:70ch;}
+.station-tag{
+  display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:999px;
+  background:rgba(140,47,74,.22);color:var(--cs-viz-5);
+  font-size:11.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+}
+.station-tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cs-viz-1);}
+
+.panel{background:var(--cs-panel);border:1px solid var(--cs-border);border-radius:var(--cs-radius);padding:24px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+.card-title{font-family:var(--cs-font-display);font-weight:600;font-size:18px;margin-bottom:8px;}
+.card-body{font-size:14.5px;color:var(--cs-on-dark-secondary);line-height:1.6;}
+.muted{color:var(--cs-on-dark-muted);}
+.btn{
+  min-height:44px;padding:0 22px;border:0;border-radius:999px;background:#fff;color:var(--cs-black);
+  font-family:var(--cs-font-body);font-weight:600;font-size:14px;cursor:pointer;
+}
+.btn:disabled{opacity:.35;cursor:default;}
+.btn-ghost{background:transparent;color:var(--cs-on-dark);border:1px solid var(--cs-border-solid);}
+
+/* ---------- burger ---------- */
+.burger-stage{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start;}
+.burger-box{
+  background:var(--cs-panel);border:1px solid var(--cs-border);border-radius:var(--cs-radius);
+  padding:22px;min-height:290px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;
+}
+.layer{width:190px;border-radius:5px;margin-bottom:3px;box-shadow:0 1px 0 rgba(0,0,0,.35);}
+.l-buntop{height:46px;border-radius:95px 95px 6px 6px;background:linear-gradient(180deg,#E0A95F,#C98B41);}
+.l-bunbase{height:26px;border-radius:6px 6px 16px 16px;background:linear-gradient(180deg,#C98B41,#A96F32);}
+.l-patty{height:24px;background:linear-gradient(180deg,#7A4A28,#5A3218);width:200px;}
+.l-cheese{height:12px;background:linear-gradient(180deg,#F4BB44,#E09E1F);width:206px;}
+.l-ketchup{height:11px;background:#C0362F;}
+.l-mayo{height:11px;background:#F3EEDA;}
+.l-mustard{height:11px;background:#DDB930;}
+.order-slip{
+  font-family:var(--cs-font-body);background:#FBFBFB;color:#17243C;border-radius:var(--cs-radius-sm);
+  padding:16px 18px;font-size:14px;line-height:1.5;border-left:5px solid var(--cs-viz-1);
+}
+.order-slip .slip-label{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#596070;margin-bottom:6px;font-weight:600;}
+.order-slip code{font-family:var(--cs-font-body);font-weight:600;font-size:15.5px;}
+.choices{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 0;}
+.choice{
+  min-height:44px;padding:0 20px;border-radius:999px;cursor:pointer;font-size:14px;font-weight:500;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);color:var(--cs-on-dark);
+  display:inline-flex;align-items:center;gap:9px;font-family:var(--cs-font-body);
+}
+.choice:hover{background:rgba(255,255,255,.12);}
+.choice:disabled{opacity:.3;cursor:default;}
+.choice .swatch{width:12px;height:12px;border-radius:50%;}
+.verdict{margin-top:22px;border-radius:var(--cs-radius);padding:20px 22px;font-size:15px;line-height:1.6;}
+.verdict h4{font-size:17px;margin-bottom:8px;}
+.verdict.fail{background:rgba(207,66,87,.12);border:1px solid rgba(207,66,87,.38);}
+.verdict.fail h4{color:var(--cs-viz-6);}
+.verdict.win{background:rgba(140,47,74,.12);border:1px solid rgba(140,47,74,.38);}
+.verdict.win h4{color:var(--cs-viz-5);}
+.round-count{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--cs-on-dark-muted);font-weight:600;margin-bottom:12px;font-family:var(--cs-font-display);}
+.hidden{display:none;}
+.takeaways{margin-top:18px;padding-left:20px;font-size:14.5px;color:var(--cs-on-dark-secondary);line-height:1.75;}
+
+/* ---------- stepper ---------- */
+.track{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
+.node{
+  flex:1;min-width:104px;padding:11px 10px;border-radius:var(--cs-radius-sm);text-align:center;
+  font-size:12.5px;font-weight:600;cursor:pointer;border:1px solid var(--cs-border);
+  background:rgba(255,255,255,.03);color:var(--cs-on-dark-muted);font-family:var(--cs-font-display);
+}
+.node.done{color:var(--cs-on-dark-secondary);border-color:rgba(140,47,74,.3);}
+.node.active{background:rgba(140,47,74,.2);border-color:var(--cs-viz-1);color:#fff;}
+.step-body{background:var(--cs-panel);border:1px solid var(--cs-border);border-radius:var(--cs-radius);padding:26px;min-height:184px;}
+.step-body .num{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--cs-on-dark-muted);font-weight:600;}
+.step-body h3{font-size:24px;margin:8px 0 12px;}
+.step-body p{font-size:15px;color:var(--cs-on-dark-secondary);margin:0;}
+.worked{margin-top:16px;padding:14px 16px;border-radius:var(--cs-radius-sm);background:rgba(140,47,74,.10);border:1px solid rgba(140,47,74,.28);font-size:13.5px;line-height:1.7;color:var(--cs-on-dark-secondary);}
+.nav{display:flex;gap:10px;align-items:center;margin-top:18px;}
+.nav .pos{margin-left:auto;font-size:13px;color:var(--cs-on-dark-muted);font-variant-numeric:tabular-nums;}
+
+/* ---------- qualify ---------- */
+.q-body{background:var(--cs-panel);border:1px solid var(--cs-border);border-radius:var(--cs-radius);padding:30px;}
+.q-body h3{font-size:23px;margin:10px 0 22px;max-width:30ch;}
+.q-actions{display:flex;gap:12px;}
+.dots{display:flex;gap:6px;margin-top:22px;}
+.dot{width:28px;height:4px;border-radius:2px;background:rgba(255,255,255,.12);}
+.dot.on{background:var(--cs-viz-1);}
+.dot.seen{background:rgba(140,47,74,.45);}
+
+/* ---------- questions ---------- */
+.qtable{width:100%;border-collapse:collapse;font-size:14.5px;}
+.qtable th{
+  text-align:left;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--cs-on-dark-muted);padding:10px 12px;border-bottom:1px solid var(--cs-border);
+}
+.qtable td{padding:13px 12px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top;line-height:1.55;}
+.qtable td.n{color:var(--cs-viz-5);font-weight:600;width:34px;font-variant-numeric:tabular-nums;}
+.qtable td.map{color:var(--cs-on-dark-muted);font-size:13px;white-space:nowrap;}
+.reveal-q{
+  margin-top:26px;padding:26px 28px;border-radius:var(--cs-radius);
+  background:rgba(110,51,82,.14);border:1px solid rgba(110,51,82,.42);
+}
+.reveal-q p{margin:0;font-family:var(--cs-font-display);font-weight:600;font-size:clamp(19px,2.6vw,25px);line-height:1.3;}
+.sidebar-flags{margin-top:26px;border-radius:var(--cs-radius);border:1px solid rgba(201,144,46,.34);background:rgba(201,144,46,.08);padding:24px;}
+.sidebar-flags h4{font-size:17px;color:var(--cs-viz-3);margin-bottom:12px;}
+.sidebar-flags ul{margin:0;padding-left:20px;font-size:14.5px;color:var(--cs-on-dark-secondary);line-height:1.75;}
+
+/* ---------- objections ---------- */
+.obj{
+  background:var(--cs-panel);border:1px solid var(--cs-border);border-radius:var(--cs-radius);
+  padding:22px 24px;cursor:pointer;
+}
+.obj .q{font-family:var(--cs-font-display);font-weight:600;font-size:17px;display:flex;justify-content:space-between;gap:14px;align-items:center;}
+.obj .q .chev{color:var(--cs-viz-5);font-size:20px;line-height:1;}
+.obj .a{display:none;margin-top:14px;font-size:14.5px;color:var(--cs-on-dark-secondary);line-height:1.65;}
+.obj.open .a{display:block;}
+.obj.open{border-color:rgba(140,47,74,.4);}
+
+/* ---------- before / after ---------- */
+.hero-toggle{display:flex;gap:8px;margin-bottom:20px;}
+.hero-toggle button{
+  min-height:44px;padding:0 18px;border-radius:999px;cursor:pointer;font-size:13.5px;font-weight:600;
+  background:rgba(255,255,255,.05);border:1px solid var(--cs-border);color:var(--cs-on-dark-muted);
+  font-family:var(--cs-font-body);
+}
+.hero-toggle button.on{background:rgba(140,47,74,.22);border-color:var(--cs-viz-1);color:#fff;}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.ba .side{border-radius:var(--cs-radius);padding:22px;border:1px solid var(--cs-border);}
+.ba .before{background:rgba(207,66,87,.07);border-color:rgba(207,66,87,.28);}
+.ba .after{background:rgba(140,47,74,.09);border-color:rgba(140,47,74,.32);}
+.ba h4{font-size:12px;letter-spacing:.09em;text-transform:uppercase;margin-bottom:14px;}
+.ba .before h4{color:var(--cs-viz-6);}
+.ba .after h4{color:var(--cs-viz-5);}
+.ba ol,.ba ul{margin:0;padding-left:20px;font-size:14px;line-height:1.75;color:var(--cs-on-dark-secondary);}
+.imagine{
+  margin-top:20px;border-radius:var(--cs-radius);padding:22px 24px;
+  background:rgba(255,255,255,.04);border-left:4px solid var(--cs-viz-3);
+  font-size:16px;line-height:1.6;color:var(--cs-on-dark-secondary);
+}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px;}
+.kpi{background:var(--cs-panel);border:1px solid var(--cs-border);border-radius:var(--cs-radius);padding:20px;}
+.kpi .lab{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--cs-on-dark-muted);margin-bottom:8px;}
+.kpi .val{font-family:var(--cs-font-display);font-weight:600;font-size:38px;line-height:1;font-variant-numeric:tabular-nums;}
+.kpi .sub{font-size:13px;color:var(--cs-on-dark-muted);margin-top:8px;line-height:1.5;}
+
+/* ---------- grounding game ---------- */
+.src{
+  display:flex;align-items:flex-start;gap:12px;padding:12px 14px;margin-bottom:8px;
+  border-radius:var(--cs-radius-sm);border:1px solid var(--cs-border);
+  background:rgba(255,255,255,.03);cursor:pointer;min-height:44px;
+}
+.src:hover{background:rgba(255,255,255,.07);}
+.src.on{background:rgba(140,47,74,.16);border-color:rgba(140,47,74,.5);}
+.src .tick{
+  width:18px;height:18px;border-radius:5px;border:1px solid rgba(255,255,255,.3);flex:0 0 auto;margin-top:1px;
+  display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;
+}
+.src.on .tick{background:var(--cs-viz-1);border-color:var(--cs-viz-1);}
+.src .nm{font-size:14px;line-height:1.4;}
+.src .hint{display:block;font-size:12.5px;color:var(--cs-on-dark-muted);margin-top:3px;}
+
+/* ---------- gate game ---------- */
+.gate-card{
+  border-radius:var(--cs-radius);border:1px solid var(--cs-border);background:var(--cs-panel);
+  padding:18px 20px;cursor:pointer;
+}
+.gate-card:hover{border-color:rgba(140,47,74,.42);}
+.gate-card .to{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--cs-on-dark-muted);margin-bottom:8px;}
+.gate-card .txt{font-size:14.5px;line-height:1.6;color:var(--cs-on-dark-secondary);}
+.gate-card.picked-bad{border-color:var(--cs-viz-1);background:rgba(140,47,74,.12);}
+.gate-card.picked-ok{border-color:rgba(207,66,87,.5);background:rgba(207,66,87,.08);}
+.gate-card.shown-bad{border-color:var(--cs-viz-2);background:rgba(207,66,87,.1);}
+.gate-card.locked{cursor:default;}
+
+/* ---------- misc ---------- */
+.chain{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px;}
+.chain span{padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--cs-border);font-size:13px;}
+.chain .arrow{border:0;background:none;color:var(--cs-viz-5);padding:0 2px;}
+.pull{
+  font-family:var(--cs-font-display);font-weight:600;font-size:clamp(20px,2.8vw,28px);
+  line-height:1.32;max-width:26ch;margin:0;
+}
+.start-list{counter-reset:s;list-style:none;padding:0;margin:0;}
+.start-list li{
+  position:relative;padding:18px 20px 18px 62px;margin-bottom:12px;
+  background:var(--cs-panel);border:1px solid var(--cs-border);border-radius:var(--cs-radius);
+  font-size:15px;color:var(--cs-on-dark-secondary);line-height:1.6;
+}
+.start-list li::before{
+  counter-increment:s;content:counter(s);
+  position:absolute;left:20px;top:18px;width:28px;height:28px;border-radius:50%;
+  background:rgba(140,47,74,.22);color:var(--cs-viz-5);
+  font-family:var(--cs-font-display);font-weight:600;font-size:14px;
+  display:flex;align-items:center;justify-content:center;
+}
+footer{padding:46px 0 60px;border-top:1px solid var(--cs-border);color:var(--cs-on-dark-muted);font-size:13px;}
+footer .mark{font-family:var(--cs-font-display);font-weight:600;letter-spacing:.14em;color:var(--cs-on-dark-secondary);font-size:14px;}
+
+:focus-visible{outline:2px solid var(--cs-viz-5);outline-offset:3px;border-radius:6px;}
+@media print{
+  body{background:#fff;color:#111;}
+  .hero{background:#fff;}
+  .hero::before,.hero::after{display:none;}
+  section,section.station{background:#fff;border-top:1px solid #ccc;page-break-inside:avoid;}
+  .panel,.step-body,.q-body,.gate-card,.burger-box,.src{background:#fff;border:1px solid #ccc;}
+  h1,h2,h3,h4,.pull,.reveal-q p{color:#111;}
+  p,.card-body,.ba ol,.ba ul,.sec-head p{color:#222;}
+  .eyebrow,.muted,.kpi .lab,.kpi .sub{color:#555;}
+  .btn,.choice,.hero-toggle,.nav,.dots,.track{display:none !important;}
+  .hidden{display:block !important;}
+  .obj .a{display:block !important;}
+}
+
+/* ---------- navigation ---------- */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--cs-viz-1);z-index:99;transition:width .1s linear;}
+.toc-wrap{padding:38px 0 42px;border-top:1px solid var(--cs-border);background:var(--cs-panel-alt);}
+.toc{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.toc-item{
+  display:flex;gap:11px;align-items:baseline;padding:11px 14px;border-radius:var(--cs-radius-sm);
+  border:1px solid var(--cs-border);background:rgba(255,255,255,.03);
+  color:var(--cs-on-dark-secondary);text-decoration:none;font-size:13.5px;line-height:1.35;min-height:44px;
+}
+.toc-item:hover{background:rgba(255,255,255,.07);border-color:var(--cs-border-solid);color:var(--cs-on-dark);}
+.toc-n{font-family:var(--cs-font-display);font-weight:600;font-size:12px;color:var(--cs-viz-5);
+  font-variant-numeric:tabular-nums;flex:0 0 auto;}
+html{scroll-behavior:smooth;}
+section[id]{scroll-margin-top:16px;}
+.skill-block{
+  background:var(--cs-panel);border:1px solid var(--cs-border);border-left:4px solid var(--cs-viz-1);
+  border-radius:var(--cs-radius-sm);padding:22px 24px;overflow-x:auto;margin:0;
+}
+.skill-block code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.65;
+  color:var(--cs-on-dark-secondary);white-space:pre;
+}
+
+/* ---------- positive states use brass, negative use crimson ---------- */
+.verdict.win{background:rgba(201,144,46,.12);border:1px solid rgba(201,144,46,.42);}
+.verdict.win h4{color:var(--cs-brass-l);}
+.ba .after{background:rgba(201,144,46,.09);border-color:rgba(201,144,46,.36);}
+.ba .after h4{color:var(--cs-brass-l);}
+.gate-card.picked-bad{border-color:var(--cs-brass);background:rgba(201,144,46,.13);}
+.station-tag{background:rgba(140,47,74,.30);color:var(--cs-viz-5);}
+.node.active{background:rgba(140,47,74,.32);}
+
+/* ---------- complementary accent (teal, opposite the wine family) ---------- */
+.station-tag{background:rgba(46,156,147,.20);color:var(--cs-teal-l);}
+.station-tag::before{background:var(--cs-teal);}
+.toc-n{color:var(--cs-teal-l);}
+#progress{background:linear-gradient(90deg,var(--cs-viz-1),var(--cs-teal));}
+.src.on{background:rgba(46,156,147,.14);border-color:rgba(46,156,147,.55);}
+.src.on .tick{background:var(--cs-teal);border-color:var(--cs-teal);color:#08120F;}
+.dot.on{background:var(--cs-teal);}
+.dot.seen{background:rgba(46,156,147,.45);}
+.node.active{background:rgba(46,156,147,.22);border-color:var(--cs-teal);}
+.node.done{border-color:rgba(46,156,147,.34);}
+.chain span{border-color:rgba(46,156,147,.26);}
+.hero-toggle button.on{background:rgba(46,156,147,.22);border-color:var(--cs-teal);color:#fff;}
+.start-list li::before{background:rgba(46,156,147,.20);color:var(--cs-teal-l);}
+.qtable td.n{color:var(--cs-teal-l);}
+.obj.open{border-color:rgba(46,156,147,.45);}
+.obj .q .chev{color:var(--cs-teal-l);}
+.skill-block{border-left-color:var(--cs-teal);}
+a{color:var(--cs-teal-l);}
+@media(max-width:820px){ .toc{grid-template-columns:1fr;} }
+@media(max-width:820px){
+  .grid3,.grid2,.ba,.kpis,.burger-stage{grid-template-columns:1fr;}
+  .track .node{min-width:0;flex:1 1 30%;}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">AI adoption · Non-engineering roles</div>
+    <h1>Your job already contains the instructions. You just never wrote them down.</h1>
+    <p class="lede">This is about agentic workflows — what they actually are, why they are not chatbots,
+      and how to tell whether the work sitting on your desk today could be handed over. There is nothing to install
+      and nothing to sign up for. There are a few things to click.</p>
+    <p class="meta">About 15 minutes if you do the exercises. About 4 if you skim.</p>
+  </div>
+</div>
+
+<div class="toc-wrap">
+  <div class="wrap">
+    <div class="eyebrow" style="margin-bottom:16px;">What is in here</div>
+    <div class="toc">
+      <a class="toc-item" href="#sec1"><span class="toc-n">01</span><span>What it is not</span></a>
+      <a class="toc-item" href="#sec2"><span class="toc-n">02</span><span>What it is</span></a>
+      <a class="toc-item" href="#sec3"><span class="toc-n">03</span><span>The actual constraint</span></a>
+      <a class="toc-item" href="#sec4"><span class="toc-n">04</span><span>Your first shift (burger)</span></a>
+      <a class="toc-item" href="#sec5"><span class="toc-n">05</span><span>The anatomy of a workflow</span></a>
+      <a class="toc-item" href="#sec6"><span class="toc-n">06</span><span>The diagram</span></a>
+      <a class="toc-item" href="#sec7"><span class="toc-n">07</span><span>What a skill looks like</span></a>
+      <a class="toc-item" href="#sec8"><span class="toc-n">08</span><span>Grounding/Context</span></a>
+      <a class="toc-item" href="#sec9"><span class="toc-n">09</span><span>Does your task qualify</span></a>
+      <a class="toc-item" href="#sec10"><span class="toc-n">10</span><span>The decision underneath</span></a>
+      <a class="toc-item" href="#sec11"><span class="toc-n">11</span><span>Trust and control</span></a>
+      <a class="toc-item" href="#sec12"><span class="toc-n">12</span><span>Where we already are</span></a>
+      <a class="toc-item" href="#sec13"><span class="toc-n">13</span><span>Two already running</span></a>
+      <a class="toc-item" href="#sec14"><span class="toc-n">14</span><span>Two more to start with</span></a>
+      <a class="toc-item" href="#sec15"><span class="toc-n">15</span><span>The knowledge layer</span></a>
+      <a class="toc-item" href="#sec16"><span class="toc-n">16</span><span>The honest part</span></a>
+      <a class="toc-item" href="#sec17"><span class="toc-n">17</span><span>At scale — who owns it</span></a>
+      <a class="toc-item" href="#sec18"><span class="toc-n">18</span><span>The objections</span></a>
+      <a class="toc-item" href="#sec19"><span class="toc-n">19</span><span>How do I start</span></a>
+      </div>
+  </div>
+</div>
+
+<!-- ============ 1. WHAT IT IS NOT ============ -->
+<section id="sec1">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">01 — Clearing the ground</div>
+      <h2>What an agentic workflow is not</h2>
+      <p>It is not a chatbot. A chatbot waits to be spoken to, answers from what it already knows, and then forgets
+        you existed. It has no access to anything real and produces nothing that lands anywhere.</p>
+      <p>An agentic workflow is triggered by something, reads real sources, follows a procedure someone wrote down,
+        produces actual work, and files that work where it belongs. The difference is not intelligence. It is access,
+        instructions, and a place for the output to go.</p>
+    </div>
+    <div class="grid3">
+      <div class="panel">
+        <div class="card-title">An LLM chatbot</div>
+        <div class="card-body">ChatGPT, Gemini, Claude, Perplexity. Underneath, these are systems that measure
+          closeness and similarity mathematically to produce the most plausible next answer. They hold no knowledge
+          beyond what they were trained on: you type, and they answer from general knowledge. They cannot see your
+          accounts, your inbox, or last quarter's numbers. Useful for phrasing an email. Useless for doing your
+          job.</div>
+      </div>
+      <div class="panel">
+        <div class="card-title">Agentic coding</div>
+        <div class="card-body">The same underlying model, given real access to a codebase and the ability to act on
+          it. It reads the existing code, understands how it is structured, reviews it, suggests changes and writes
+          new code that matches the conventions already there. The difference is not that it is cleverer. It is that
+          it can see the actual work and act on it.</div>
+      </div>
+      <div class="panel" style="border-color:rgba(140,47,74,.42);background:rgba(140,47,74,.07);">
+        <div class="card-title" style="color:var(--cs-viz-5);">Agentic workflows</div>
+        <div class="card-body">The same idea pointed at everything that is not code. Real access to the systems your
+          work actually lives in, a written procedure for one specific task, and a person approving the result
+          before anything happens. This is what the rest of this document is about.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. WHAT IT IS ============ -->
+<section id="sec2">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">02 — The idea in one sentence</div>
+      <h2>It is a capable new colleague you hand a written procedure to</h2>
+    </div>
+    <div class="grid2">
+      <div>
+        <p>Picture the best new starter you have ever had. Quick, willing, tireless, never bored by the fiftieth
+          repetition of the same task.</p>
+        <p>They also know nothing about how <em>we</em> do things. Not because they are slow — because nobody has
+          told them yet. Everything they produce depends entirely on the quality of what you wrote down for them.</p>
+        <p class="muted">Which means the interesting question was never "how clever is the AI?" It is
+          "how good are my instructions?"</p>
+      </div>
+      <div class="panel" style="display:flex;align-items:center;">
+        <p class="pull">You are about to be that new colleague. You start today, and your first shift is in a burger
+          shop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. WHY NOT ALREADY ============ -->
+<section id="sec3">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">03 — The actual constraint</div>
+      <h2>The reason this has not already happened</h2>
+    </div>
+    <div class="grid2" style="align-items:start;">
+      <div>
+        <p>It is tempting to assume the thing holding organisations back is the technology. That the models are not
+          good enough yet, or the tools are not ready, or nobody has found the budget.</p>
+        <p>That is not what is happening. The constraint is much less interesting than that, and much harder to fix
+          with money.</p>
+        <p>Almost nothing an organisation does is written down. Not the org chart or the policy documents or the
+          onboarding deck — those exist. The actual <em>procedures</em>. How this specific decision gets made, by
+          whom, using what, and what makes it a yes rather than a no. That lives in people's heads, and the people
+          holding the most of it are the busiest people in the building.</p>
+      </div>
+      <div>
+        <div class="panel" style="border-color:rgba(140,47,74,.34);background:rgba(140,47,74,.06);">
+          <div class="card-title" style="color:var(--cs-viz-5);">Why engineering went first</div>
+          <div class="card-body">It has very little to do with engineers being more technical. Their work is already
+            structured: the process is defined, the format is defined, the procedure is written down — that is what
+            code is — and the knowledge base is easy to connect and share. When an agentic tool arrives, the
+            instructions are already there waiting for it. Everywhere else in the company, they are not.</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:26px;border-color:rgba(201,144,46,.34);background:rgba(201,144,46,.08);">
+      <div class="card-title" style="color:var(--cs-viz-3);">And there is a bill attached to that</div>
+      <div class="card-body" style="font-size:15px;">If the procedure only exists in somebody's head, it leaves when
+        they do. Not the documents and not the records — those stay. The thing that walks out is how the work was
+        actually done: the sequence, the exceptions, the reasons behind the reasons, the things that were obvious to
+        one person and invisible to everyone else. Every organisation has processes that nobody alive can fully
+        explain, and every one of those started as somebody's undocumented competence. Writing procedures down is
+        worth doing whether or not anything ever gets automated. Automation is simply the first reason most people
+        find compelling enough to actually do it.</div>
+    </div>
+    <div class="reveal-q" style="margin-top:26px;">
+      <p>The question was never whether the AI is clever enough to do your job. It is whether anyone has ever
+        written down how your job is done.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. BURGER STATION ============ -->
+<section id="sec4" class="station">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="station-tag">Interactive</span>
+      <h2>Your first shift</h2>
+      <p>You have just started at a burger chain. There is an order in front of you for two burgers.</p>
+      <p><strong>Two rounds.</strong> The first uses the kind of instructions most of us actually leave behind for
+        other people. The second uses instructions written properly. The difference between those two rounds is the
+        entire point of this document.</p>
+    </div>
+
+    <!-- ROUND 1 -->
+    <div id="r1">
+      <div class="round-count">Round 1 of 2 — burger one</div>
+      <div class="burger-stage">
+        <div class="burger-box" id="box1">
+          <div class="layer l-buntop"></div>
+          <div class="layer l-cheese"></div>
+          <div class="layer l-patty"></div>
+          <div class="layer l-bunbase"></div>
+        </div>
+        <div>
+          <div class="order-slip">
+            <div class="slip-label">Note left by the last person on shift</div>
+            <code>Add sauce.</code>
+          </div>
+          <p class="muted" style="margin-top:16px;font-size:14px;">The bun, patty and cheese are done. Sauce is yours.
+            Pick one and the burger goes out.</p>
+          <div class="choices" id="choices1">
+            <button class="choice" onclick="r1pick('ketchup')"><span class="swatch" style="background:#C0362F"></span>Ketchup</button>
+            <button class="choice" onclick="r1pick('mayo')"><span class="swatch" style="background:#F3EEDA"></span>Mayo</button>
+            <button class="choice" onclick="r1pick('mustard')"><span class="swatch" style="background:#DDB930"></span>Mustard</button>
+          </div>
+        </div>
+      </div>
+      <div id="v1" class="verdict fail hidden">
+        <h4>The order was ketchup and mayo, no mustard.</h4>
+        <p style="margin:0 0 12px;">You had no way of knowing that.</p>
+        <p style="margin:0;">You did nothing wrong — the instruction did. This is exactly what happens when a task is
+          handed to someone without the detail they actually needed to do it. The work still gets done. It is just
+          the wrong work, confidently.</p>
+        <div style="margin-top:18px;"><button class="btn" onclick="startR2()">Get the proper instructions →</button></div>
+      </div>
+    </div>
+
+    <!-- ROUND 2 -->
+    <div id="r2" class="hidden" style="margin-top:44px;padding-top:38px;border-top:1px solid var(--cs-border);">
+      <div class="round-count">Round 2 of 2 — burger two</div>
+      <div class="burger-stage">
+        <div class="burger-box" id="box2">
+          <div class="layer l-cheese"></div>
+          <div class="layer l-patty"></div>
+          <div class="layer l-bunbase"></div>
+        </div>
+        <div>
+          <div class="order-slip" style="border-left-color:var(--cs-viz-2);">
+            <div class="slip-label">The written procedure</div>
+            <code>Add ketchup, then add mayo, skip mustard. Then close the bun.</code>
+          </div>
+          <p class="muted" style="margin-top:16px;font-size:14px;" id="r2hint">Same ingredients. Same you. Follow it in order.</p>
+          <div class="choices" id="choices2">
+            <button class="choice" id="c-ketchup" onclick="r2pick('ketchup')"><span class="swatch" style="background:#C0362F"></span>Ketchup</button>
+            <button class="choice" id="c-mayo" onclick="r2pick('mayo')"><span class="swatch" style="background:#F3EEDA"></span>Mayo</button>
+            <button class="choice" id="c-mustard" onclick="r2pick('mustard')"><span class="swatch" style="background:#DDB930"></span>Mustard</button>
+            <button class="choice" id="c-close" onclick="r2pick('close')">Close the bun</button>
+          </div>
+        </div>
+      </div>
+      <div id="v2" class="verdict win hidden">
+        <h4>Correct, first time.</h4>
+        <p style="margin:0 0 12px;">Same colleague. Same ingredients. Same ability. The only thing that changed is
+          what you wrote down.</p>
+        <p style="margin:0;">That written procedure is the reusable part. Not the AI — the instruction. Write it once
+          and anyone, or anything, can execute it the same way every time.</p>
+        <ul class="takeaways">
+          <li><strong>Order matters.</strong> Sauce after the bun closes is not the same burger.</li>
+          <li><strong>Ambiguity breaks execution.</strong> "Add sauce" was not a small gap. It was the whole decision.</li>
+          <li><strong>What you skip must be stated as explicitly as what you include.</strong> "Skip mustard" is an
+            instruction, not an omission.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. ANATOMY STATION ============ -->
+<section id="sec5" class="station">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="station-tag">Interactive</span>
+      <h2>The anatomy of a workflow</h2>
+      <p>Every automation worth building has the same six parts. Once you can see them, you can see them everywhere —
+        including in the burger you just made.</p>
+    </div>
+    <div class="track" id="track"></div>
+    <div class="step-body">
+      <div class="num" id="s-num"></div>
+      <h3 id="s-title"></h3>
+      <p id="s-detail"></p>
+      <div class="worked hidden" id="s-worked"></div>
+    </div>
+    <div class="nav">
+      <button class="btn btn-ghost" id="s-prev" onclick="stepMove(-1)">← Back</button>
+      <button class="btn" id="s-next" onclick="stepMove(1)">Next →</button>
+      <span class="pos" id="s-pos"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIAGRAM ============ -->
+<section id="sec6">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">DIAGRAM — The same six parts, drawn</div>
+      <h2>What actually happens when one runs</h2>
+      <p>The stepper above describes the parts one at a time. This is all of them at once — what gets read, what
+        decides, what acts, and where a person sits in the middle of it.</p>
+    </div>
+    <div class="panel" style="padding:26px 22px;overflow-x:auto;">
+      <svg viewBox="0 0 980 520" width="100%" style="min-width:660px;display:block;" role="img"
+           aria-label="Diagram of an agentic workflow: a trigger starts it, grounding and context reads from connected sources, a written skill and its tools decide what to do, execution produces a draft, a human gate approves or rejects, and the approved result is written back to the system of record. Edits made at the human gate feed back into the skill.">
+        <defs>
+          <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto">
+            <path d="M0,0 L7,3.2 L0,6.4 z" fill="#E2A3B2"/>
+          </marker>
+          <marker id="ahd" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto">
+            <path d="M0,0 L7,3.2 L0,6.4 z" fill="#C9902E"/>
+          </marker>
+        </defs>
+
+        <!-- sources -->
+        <text x="30" y="38" fill="#A08D91" font-family="Urbanist,sans-serif" font-size="12" font-weight="600"
+              letter-spacing="1.4">WHERE THE TRUTH LIVES</text>
+        <g font-family="Inter,sans-serif" font-size="12.5" fill="#CDBCB9">
+          <rect x="30" y="52" width="132" height="30" rx="15" fill="rgba(255,255,255,.05)" stroke="#3B2A30"/>
+          <text x="96" y="71" text-anchor="middle">CRM / records</text>
+          <rect x="176" y="52" width="120" height="30" rx="15" fill="rgba(255,255,255,.05)" stroke="#3B2A30"/>
+          <text x="236" y="71" text-anchor="middle">Email</text>
+          <rect x="310" y="52" width="132" height="30" rx="15" fill="rgba(255,255,255,.05)" stroke="#3B2A30"/>
+          <text x="376" y="71" text-anchor="middle">Documents</text>
+          <rect x="456" y="52" width="132" height="30" rx="15" fill="rgba(255,255,255,.05)" stroke="#3B2A30"/>
+          <text x="522" y="71" text-anchor="middle">Data / metrics</text>
+          <rect x="602" y="52" width="120" height="30" rx="15" fill="rgba(255,255,255,.05)" stroke="#3B2A30"/>
+          <text x="662" y="71" text-anchor="middle">Chat</text>
+        </g>
+        <g stroke="#8C2F4A" stroke-width="1.3" opacity=".55" fill="none">
+          <path d="M96,84 L96,120 L300,120 L300,150" marker-end="url(#ah)"/>
+          <path d="M236,84 L236,112 L300,112 L300,150" marker-end="url(#ah)"/>
+          <path d="M376,84 L376,112 L310,112 L310,150" marker-end="url(#ah)"/>
+          <path d="M522,84 L522,120 L320,120 L320,150" marker-end="url(#ah)"/>
+          <path d="M662,84 L662,128 L330,128 L330,150" marker-end="url(#ah)"/>
+        </g>
+
+        <!-- trigger -->
+        <rect x="30" y="196" width="150" height="76" rx="14" fill="rgba(140,47,74,.14)" stroke="#8C2F4A"/>
+        <text x="105" y="226" text-anchor="middle" fill="#fff" font-family="Urbanist,sans-serif" font-size="15"
+              font-weight="600">1 · Trigger</text>
+        <text x="105" y="248" text-anchor="middle" fill="#CDBCB9" font-family="Inter,sans-serif" font-size="11.5">A schedule, an event,</text>
+        <text x="105" y="263" text-anchor="middle" fill="#CDBCB9" font-family="Inter,sans-serif" font-size="11.5">or someone asking</text>
+
+        <!-- grounding -->
+        <rect x="216" y="150" width="188" height="168" rx="14" fill="rgba(46,156,147,.12)" stroke="#2E9C93"/>
+        <text x="310" y="180" text-anchor="middle" fill="#fff" font-family="Urbanist,sans-serif" font-size="15"
+              font-weight="600">2 · Grounding/Context</text>
+        <text x="310" y="205" text-anchor="middle" fill="#CDBCB9" font-family="Inter,sans-serif" font-size="11.5">Reads only the sources</text>
+        <text x="310" y="221" text-anchor="middle" fill="#CDBCB9" font-family="Inter,sans-serif" font-size="11.5">it was granted</text>
+        <text x="310" y="252" text-anchor="middle" fill="#7FD3CB" font-family="Inter,sans-serif" font-size="11.5" font-weight="600">What you include</text>
+        <text x="310" y="268" text-anchor="middle" fill="#7FD3CB" font-family="Inter,sans-serif" font-size="11.5" font-weight="600">and exclude is a</text>
+        <text x="310" y="284" text-anchor="middle" fill="#7FD3CB" font-family="Inter,sans-serif" font-size="11.5" font-weight="600">decision</text>
+
+        <!-- skill -->
+        <rect x="440" y="150" width="180" height="76" rx="14" fill="rgba(110,51,82,.16)" stroke="#6E3352"/>
+        <text x="530" y="180" text-anchor="middle" fill="#fff" font-family="Urbanist,sans-serif" font-size="15"
+              font-weight="600">3 · The skill</text>
+        <text x="530" y="202" text-anchor="middle" fill="#CDBCB9" font-family="Inter,sans-serif" font-size="11.5">The written procedure,</text>
+        <text x="530" y="217" text-anchor="middle" fill="#CDBCB9" font-family="Inter,sans-serif" font-size="11.5">plus the tools it may use</text>
+
+        <!-- execution -->
+        <rect x="440" y="242" width="180" height="76" rx="14" fill="rgba(140,47,74,.10)" stroke="#8C2F4A"/>
+        <text x="530" y="272" text-anchor="middle" fill="#fff" font-family="Urbanist,sans-serif" font-size="15"
+              font-weight="600">4 · Execution</text>
+        <text x="530" y="294" text-anchor="middle" fill="#CDBCB9" font-family="Inter,sans-serif" font-size="11.5">Produces a first version.</text>
+        <text x="530" y="309" text-anchor="middle" fill="#CDBCB9" font-family="Inter,sans-serif" font-size="11.5">Nothing has left yet.</text>
+
+        <!-- human gate -->
+        <rect x="662" y="196" width="180" height="122" rx="14" fill="rgba(207,66,87,.12)" stroke="#CF4257" stroke-width="1.6"/>
+        <text x="752" y="228" text-anchor="middle" fill="#fff" font-family="Urbanist,sans-serif" font-size="15"
+              font-weight="600">5 · Human gate</text>
+        <text x="752" y="252" text-anchor="middle" fill="#F0949F" font-family="Inter,sans-serif" font-size="11.5" font-weight="600">A person approves,</text>
+        <text x="752" y="268" text-anchor="middle" fill="#F0949F" font-family="Inter,sans-serif" font-size="11.5" font-weight="600">edits or rejects</text>
+        <text x="752" y="292" text-anchor="middle" fill="#CDBCB9" font-family="Inter,sans-serif" font-size="11.5">Nothing passes here</text>
+        <text x="752" y="307" text-anchor="middle" fill="#CDBCB9" font-family="Inter,sans-serif" font-size="11.5">on its own</text>
+
+        <!-- write-back -->
+        <rect x="662" y="368" width="180" height="72" rx="14" fill="rgba(201,144,46,.14)" stroke="#C9902E"/>
+        <text x="752" y="397" text-anchor="middle" fill="#fff" font-family="Urbanist,sans-serif" font-size="15"
+              font-weight="600">6 · Write-back</text>
+        <text x="752" y="419" text-anchor="middle" fill="#CDBCB9" font-family="Inter,sans-serif" font-size="11.5">Sent, filed, recorded —</text>
+        <text x="752" y="434" text-anchor="middle" fill="#CDBCB9" font-family="Inter,sans-serif" font-size="11.5">in the system of record</text>
+
+        <!-- main flow arrows -->
+        <g stroke="#8C2F4A" stroke-width="1.8" fill="none">
+          <path d="M180,234 L212,234" marker-end="url(#ah)"/>
+          <path d="M404,196 L436,188" marker-end="url(#ah)"/>
+          <path d="M404,272 L436,280" marker-end="url(#ah)"/>
+          <path d="M530,226 L530,238" marker-end="url(#ah)"/>
+          <path d="M620,280 L658,262" marker-end="url(#ah)"/>
+          <path d="M752,318 L752,364" marker-end="url(#ah)"/>
+        </g>
+
+        <!-- feedback loop -->
+        <path d="M662,240 L640,240 L640,124 L530,124 L530,146" stroke="#C9902E" stroke-width="1.5"
+              stroke-dasharray="6 5" fill="none" marker-end="url(#ahd)"/>
+        <text x="586" y="116" text-anchor="middle" fill="#C9902E" font-family="Inter,sans-serif" font-size="11.5"
+              font-weight="600">Edits improve the procedure</text>
+
+        <!-- rejected path -->
+        <text x="866" y="252" fill="#A08D91" font-family="Inter,sans-serif" font-size="11.5">Rejected →</text>
+        <text x="866" y="268" fill="#A08D91" font-family="Inter,sans-serif" font-size="11.5">nothing happens</text>
+
+        <!-- caption -->
+        <text x="30" y="478" fill="#A08D91" font-family="Inter,sans-serif" font-size="12">Everything left of the gate is gathering and drafting. Everything at the gate is judgement. Only past the gate does anything real happen.</text>
+      </svg>
+    </div>
+    <p style="margin-top:18px;color:var(--cs-on-dark-secondary);max-width:72ch;">Two things are worth pointing at.
+      The dashed line is the part people miss: when someone edits the output, that correction is not thrown away —
+      it goes back into the written procedure, so the same mistake does not arrive again next week. And the gate is
+      not a formality at the end. It is the only route to anything actually happening.</p>
+  </div>
+</section>
+
+<!-- ============ SKILL EXAMPLE ============ -->
+<section id="sec7">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">SKILL — The part a person writes</div>
+      <h2>What one actually looks like</h2>
+      <p>Every part of the framework above is configuration except one. The skill is the part a person writes, and
+        it is the only part that carries your judgement. Here is a real one, short enough to read in a minute.</p>
+    </div>
+    <pre class="skill-block"><code>SKILL: Pre-call account brief
+
+TRIGGER
+  Run when a client call is booked, the morning before the call.
+
+GROUNDING/CONTEXT
+  Read, for this account only:
+    - the account record: contract, renewal date, open issues
+    - the transcript of the most recent call
+    - the email thread with the client, last 90 days
+    - last quarter's performance numbers
+  Do not use: personal notes, general web search, anything
+  older than 12 months unless nothing newer exists.
+
+PROCEDURE
+  1. State the renewal date and how many weeks away it is.
+  2. List open escalations. For each: what it is, who owns it,
+     how long it has been open.
+  3. Give the quarter-on-quarter movement in the headline
+     number, and name the single largest driver of that
+     movement. Do not report the number without the driver.
+  4. List every commitment we made on the last call and mark
+     each one done or outstanding.
+  5. Flag anything the client raised twice. Repetition means
+     it was not resolved the first time.
+
+RULES
+  - If a source is missing or empty, say so explicitly.
+    Never fill a gap with a general statement.
+  - Name the current primary contact from the account record,
+    never from older material.
+  - Six bullets maximum. This is read in a corridor.
+
+HUMAN GATE
+  Output goes to the account owner as a draft. Nothing is sent
+  to the client and nothing is written to the record until
+  they approve it.
+
+WRITE-BACK
+  On approval, save to the account record as a call note,
+  dated, attached to the meeting.</code></pre>
+    <div class="grid2" style="margin-top:22px;align-items:start;">
+      <div>
+        <p style="color:var(--cs-on-dark-secondary);">That is the whole thing. Notice what is in it and what is
+          not.</p>
+        <p style="color:var(--cs-on-dark-secondary);">There is no cleverness in it and no attempt to sound like
+          anything. It is the kind of note you would leave for a colleague covering your accounts while you are on
+          holiday — except this one gets followed exactly, every time, without the colleague quietly filling in the
+          gaps from experience you never wrote down.</p>
+      </div>
+      <div class="panel">
+        <div class="card-title" style="font-size:16px;">The lines that look like overkill</div>
+        <div class="card-body">
+          <p style="margin:0 0 10px;"><em>Do not report the number without the driver</em> — because somebody once
+            did.</p>
+          <p style="margin:0 0 10px;"><em>Never fill a gap with a general statement</em> — because the first version
+            did exactly that, fluently enough that nobody noticed for two weeks.</p>
+          <p style="margin:0 0 10px;"><em>Six bullets maximum</em> — because the first version was four paragraphs
+            and nobody read it.</p>
+          <p style="margin:0;">This is what early rounds of iteration actually produce. Not a better model — a
+            longer list of things you did not know you knew.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4b. GROUNDING STATION ============ -->
+<section id="sec8" class="station">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="station-tag">Interactive</span>
+      <h2>Grounding/Context — what is it allowed to read?</h2>
+      <p>Grounding — or context, the same thing said plainly — is the part people get wrong most often, usually by assuming the answer is "give it everything."
+        It is not. It is a decision about what this particular task actually needs.</p>
+      <p><strong>The task:</strong> draft the brief for tomorrow's client call with Acme. Choose what to switch on,
+        then see what comes out.</p>
+    </div>
+    <div class="grid2" style="align-items:start;">
+      <div class="panel">
+        <div class="eyebrow" style="margin-bottom:14px;">Available sources</div>
+        <div id="src-list"></div>
+        <button class="btn" style="margin-top:18px;" onclick="runGrounding()">Generate the brief →</button>
+      </div>
+      <div class="panel" id="brief-panel" style="min-height:250px;">
+        <div class="eyebrow" style="margin-bottom:14px;">The brief</div>
+        <p id="brief-out" style="font-size:14.5px;color:var(--cs-on-dark-muted);margin:0;">Nothing selected yet.
+          Pick your sources and generate.</p>
+        <div id="brief-note" class="hidden" style="margin-top:18px;padding-top:16px;border-top:1px solid var(--cs-border);font-size:14px;line-height:1.65;color:var(--cs-on-dark-secondary);"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. QUALIFY STATION ============ -->
+<section id="sec9" class="station">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="station-tag">Interactive</span>
+      <h2>Does your task qualify?</h2>
+      <p>Pick one real task you did this week — ideally one you find tedious. Six questions. Answer for that task.</p>
+    </div>
+    <div class="q-body">
+      <div id="q-live">
+        <div class="eyebrow" id="q-count"></div>
+        <h3 id="q-text"></h3>
+        <div class="q-actions">
+          <button class="btn" onclick="qAnswer(true)">Yes</button>
+          <button class="btn btn-ghost" onclick="qAnswer(false)">No</button>
+        </div>
+        <div class="dots" id="q-dots"></div>
+      </div>
+      <div id="q-result" class="hidden">
+        <div class="eyebrow" id="q-verdict-tag"></div>
+        <h3 id="q-verdict-title"></h3>
+        <p id="q-verdict-body" style="color:var(--cs-on-dark-secondary);font-size:15px;max-width:62ch;"></p>
+        <button class="btn btn-ghost" onclick="qReset()">Try another task</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. DECISION ARCHITECTURE + 10 QUESTIONS ============ -->
+<section id="sec10">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">04 — Going deeper on your own task</div>
+      <h2>The decision underneath the task</h2>
+      <p>Every task hides a decision. Every decision has three parts: the <strong>choice</strong> being made,
+        <strong>who has the authority</strong> to make it, and the <strong>information</strong> needed to make it well.
+        Most work that feels un-automatable feels that way because the choice is invisible — it has collapsed into
+        habit, and the gathering around it has quietly expanded to fill the day.</p>
+      <p>These ten questions walk you through those three parts for your own task. There is nothing to fill in.
+        Read them slowly and answer them in your head.</p>
+    </div>
+    <table class="qtable">
+      <thead><tr><th></th><th>Question</th><th>Maps to</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td>What is the actual decision at the end of this task?</td><td class="map">The choice</td></tr>
+        <tr><td class="n">2</td><td>How often do you do this, and what sets it off?</td><td class="map">Trigger</td></tr>
+        <tr><td class="n">3</td><td>Where do you look before you decide? Name every place.</td><td class="map">Grounding/Context</td></tr>
+        <tr><td class="n">4</td><td>What are you actually comparing across those sources?</td><td class="map">Grounding/Context</td></tr>
+        <tr><td class="n">5</td><td>How do you weigh them? What makes it a yes and not a no?</td><td class="map">Skill</td></tr>
+        <tr><td class="n">6</td><td>Think of the last time this was genuinely hard. What made it hard?</td><td class="map">Skill</td></tr>
+        <tr><td class="n">7</td><td>What did you notice that a less experienced person would have missed?</td><td class="map">Skill</td></tr>
+        <tr><td class="n">8</td><td>If a sharp new starter did this from your notes, where would they get it wrong?</td><td class="map">Skill</td></tr>
+        <tr><td class="n">9</td><td>Who is allowed to make the final call, and what happens if it is wrong?</td><td class="map">Human gate</td></tr>
+        <tr><td class="n">10</td><td>Once you have decided, what do you do, and where does it get recorded?</td><td class="map">Write-back</td></tr>
+      </tbody>
+    </table>
+
+    <div class="reveal-q">
+      <p>Of all that — how much time went on the deciding, and how much on the gathering?</p>
+    </div>
+
+    <div class="sidebar-flags">
+      <h4>Four reasons to stop and think</h4>
+      <ul>
+        <li><strong>Judgment that has to stay with a person.</strong> Anything where the call itself is the job.</li>
+        <li><strong>Irreversible actions with no review step.</strong> If it cannot be undone, it does not go out unchecked.</li>
+        <li><strong>Data that cannot go to a third-party vendor</strong> under company policy. Check before, not after.</li>
+        <li><strong>A process that is already broken.</strong> Automation makes a process faster, not better. Fix it first.</li>
+      </ul>
+      <p style="margin:16px 0 0;font-size:14.5px;color:var(--cs-on-dark-secondary);">A red flag usually does not kill
+        the task. It means you automate the drafting and keep the send action human.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. TRUST AND CONTROL ============ -->
+<section id="sec11">
+  <div class="wrap">
+    <div class="grid2" style="align-items:center;">
+      <div class="sec-head" style="margin:0;">
+        <div class="eyebrow">06 — Trust and control</div>
+        <h2>Nothing acts unwatched</h2>
+        <p>No message sends, no record updates and no client sees anything without a person approving it first.
+          That is not a concession bolted on to reassure people. It is structural — the human gate is one of the six
+          parts, and a workflow without one is not finished.</p>
+      </div>
+      <div class="panel">
+        <p class="pull" style="max-width:none;">AI cannot be accountable. People can.</p>
+        <p style="margin:16px 0 0;color:var(--cs-on-dark-secondary);font-size:15px;">Which is exactly why the final
+          go/no-go stays with a person. Accountability is not a task you can delegate to software, so the decision
+          it attaches to stays put.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:46px;padding-top:36px;border-top:1px solid rgba(140,47,74,.28);">
+      <span class="station-tag">Interactive</span>
+      <h2 style="font-size:clamp(22px,3vw,30px);margin:12px 0 12px;">Be the gate</h2>
+      <p style="color:var(--cs-on-dark-secondary);max-width:70ch;">Four drafts are queued and ready to send. Three are
+        fine. One should not go out. You have the time it takes to read them — which is the point.</p>
+      <div id="gate-cards" style="display:flex;flex-direction:column;gap:12px;margin-top:22px;"></div>
+      <div id="gate-verdict" class="verdict hidden" style="margin-top:22px;"></div>
+    </div>
+
+    <div style="margin-top:46px;padding-top:36px;border-top:1px solid var(--cs-border);">
+      <h2 style="font-size:clamp(22px,3vw,30px);margin:0 0 14px;">The part nobody mentions</h2>
+      <div class="grid2" style="align-items:start;">
+        <div>
+          <p style="color:var(--cs-on-dark-secondary);">A workflow is not finished when it works. It is finished
+            when someone owns it.</p>
+          <p style="color:var(--cs-on-dark-secondary);">Things move. A field gets renamed, a process changes, a team
+            reorganises, a source moves. The workflow does not announce any of this. It carries on running and
+            quietly produces output that is slightly wrong — and because the output looks exactly like it did last
+            month, nobody notices for a while.</p>
+        </div>
+        <div>
+          <p style="color:var(--cs-on-dark-secondary);">This is the most common way these things fail in practice,
+            and it is nothing like the failure people expect. The fear is that the AI will do something dramatic.
+            The reality is that it keeps doing something reasonable long after the reasonable thing changed.</p>
+          <div class="panel" style="border-color:rgba(201,144,46,.34);background:rgba(201,144,46,.08);">
+            <div class="card-body">Two consequences. Every workflow needs a named owner — a person, not a team. And
+              the human gate is not only there to catch bad output, it is there to make sure somebody is still
+              looking.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. THREE DOMAINS ============ -->
+<section id="sec12">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">07 — Where we already are</div>
+      <h2>This is not new to the company. It is new to your desk.</h2>
+    </div>
+    <div class="grid3">
+      <div class="panel">
+        <div class="card-title">AI inside your own product</div>
+        <div class="card-body">Whatever machine learning already ships inside what your company sells — classifiers,
+          ranking, detection, generated content. Mature, running at scale, and entirely internal to the product.</div>
+      </div>
+      <div class="panel">
+        <div class="card-title">AI in Engineering</div>
+        <div class="card-body">Coding assistants, agentic investigations, issue analysis. Usually the highest adoption in
+          any company, and no case left to make. Also internal — tied to engineering systems and workflows.</div>
+      </div>
+      <div class="panel" style="border-color:rgba(140,47,74,.42);background:rgba(140,47,74,.07);">
+        <div class="card-title" style="color:var(--cs-viz-5);">Everywhere else</div>
+        <div class="card-body">Sales, Business Development, Marketing, Client Success, Operations, Finance, HR.
+          Client-facing, judgement-heavy, and almost entirely untouched. This is the gap.</div>
+      </div>
+    </div>
+    <p style="margin-top:24px;color:var(--cs-on-dark-secondary);max-width:70ch;">The first two columns are proof that
+      the company can build and run this kind of thing well. Neither of them is connected to anything a non-engineer
+      could pick up, and neither of them touches the work in the third column. That is the whole opportunity.</p>
+  </div>
+</section>
+
+<!-- ============ 10. BEFORE / AFTER STATION ============ -->
+<section id="sec13" class="station">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="station-tag">Interactive</span>
+      <h2>Examples of two that are already running</h2>
+      <p>Two real shapes of workflow. One is about volume, one is about the length of the path.</p>
+    </div>
+    <div class="hero-toggle">
+      <button id="t-h1" class="on" onclick="showHero(1)">Bulk personalised outreach — the volume story</button>
+      <button id="t-h2" onclick="showHero(2)">Investigation and follow-up — the chain story</button>
+    </div>
+
+    <div id="hero1">
+      <div class="ba">
+        <div class="side before">
+          <h4>Before</h4>
+          <ol>
+            <li>Read each generated recommendation, one at a time</li>
+            <li>Look up the person responsible for that account</li>
+            <li>Draft a message specific to that person and that recommendation</li>
+            <li>Send it</li>
+            <li>Repeat</li>
+          </ol>
+        </div>
+        <div class="side after">
+          <h4>After</h4>
+          <ul>
+            <li>Runs automatically across the full set</li>
+            <li>Messages drafted per person, per item</li>
+            <li>One review pass before anything sends</li>
+            <li>Approvals and responses recorded as they come back</li>
+          </ul>
+        </div>
+      </div>
+      <div class="imagine">
+        Imagine drafting 117 messages to 117 different people. Different content each time, same overarching message.
+        You do not know who those people are, and you do not know what the specific conditions of each message
+        should be.
+      </div>
+      <div class="kpis" style="grid-template-columns:1fr 1fr;">
+        <div class="kpi" style="border-color:rgba(207,66,87,.3);background:rgba(207,66,87,.06);">
+          <div class="lab" style="color:var(--cs-viz-6);">Last round done by hand</div>
+          <div class="val">40 <span style="font-size:20px;color:var(--cs-on-dark-muted);">items · 30 people</span></div>
+          <div class="sub">A day and a half to prepare and send.</div>
+        </div>
+        <div class="kpi" style="border-color:rgba(201,144,46,.38);background:rgba(201,144,46,.08);">
+          <div class="lab" style="color:var(--cs-brass-l);">Last round automated</div>
+          <div class="val">167 <span style="font-size:20px;color:var(--cs-on-dark-muted);">items · 117 people</span></div>
+          <div class="sub">Under 10 minutes, including the review.</div>
+        </div>
+      </div>
+      <p style="margin-top:12px;font-size:13px;color:var(--cs-on-dark-muted);">One team's figures, same workflow,
+        two consecutive rounds.</p>
+      <p style="margin-top:14px;color:var(--cs-on-dark-secondary);max-width:72ch;">Read those two side by side. It is
+        not the same job done a bit quicker — it is four times the volume, reaching four times as many people, in a
+        fraction of one percent of the time. The manual version was real and it worked. It just could not grow.</p>
+    </div>
+
+    <div id="hero2" class="hidden">
+      <div class="ba">
+        <div class="side before">
+          <h4>Before</h4>
+          <ol>
+            <li>Analyse each ticket as it is created</li>
+            <li>Check which accounts are involved</li>
+            <li>Log into a separate tool to identify the responsible person</li>
+            <li>Map that person to the ticket</li>
+            <li>Follow up on Slack, then chase each person individually</li>
+            <li>Read the answers and summarise them</li>
+            <li>Post the summary back to the ticket and update its status</li>
+          </ol>
+        </div>
+        <div class="side after">
+          <h4>After</h4>
+          <ul>
+            <li>Review, summary, outreach and analysis all run</li>
+            <li>Findings arrive assembled, with the chasing already done</li>
+            <li>One person takes the final action</li>
+          </ul>
+        </div>
+      </div>
+      <div class="chain">
+        <span>Ticketing</span><span class="arrow">→</span><span>CRM</span><span class="arrow">→</span>
+        <span>Chat</span><span class="arrow">→</span><span>back to ticketing</span>
+      </div>
+      <p style="margin-top:20px;color:var(--cs-on-dark-secondary);max-width:72ch;">Fewer items than the volume story,
+        but a longer path — four tools, a human chase in the middle, and a result that has to land back in the system
+        of record. This is the one that proves write-back. The work is not finished when the analysis is done; it is
+        finished when the record is updated.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 10b. SUGGESTED AUTOMATIONS ============ -->
+<section id="sec14" class="station">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="station-tag">Build these</span>
+      <h2>Two you could put into your business today</h2>
+      <p>Neither of these is exotic and neither needs a project. They are the two patterns that turn up in almost
+        every organisation, in almost every team, and you will probably recognise your own version of both.</p>
+    </div>
+
+    <div class="grid2" style="align-items:start;">
+      <div class="panel">
+        <div class="eyebrow" style="color:var(--cs-viz-5);margin-bottom:10px;">One</div>
+        <div class="card-title">The account narrative</div>
+        <div class="card-body">
+          <p style="margin:0 0 12px;">The CRM already holds rich context — emails, meeting notes, recovery plans,
+            health scores, survey responses — alongside whatever sits in the data warehouse. Today somebody has to
+            hunt through all of it, and some of those plans run long.</p>
+          <p style="margin:0 0 12px;">Instead, a clean narrative on request:</p>
+          <div class="order-slip" style="margin-bottom:12px;">
+            <div class="slip-label">The ask, as it would actually be phrased</div>
+            <code style="font-size:14px;">I hear there are technical issues with this account — summarise the
+              current risks, owners, blockers and next steps, and highlight who owns the next step on anything
+              technical.</code>
+          </div>
+          <p style="margin:0;">The value is not the summary. It is the search across every source at once, which is
+            the part no person can do quickly. Whoever owns the relationship benefits, and so does anyone above them
+            who needs the picture without the digging.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="eyebrow" style="color:var(--cs-viz-5);margin-bottom:10px;">Two</div>
+        <div class="card-title">Data and process hygiene</div>
+        <div class="card-body">
+          <p style="margin:0 0 12px;">Most organisations have trained people on the process and still have gaps in
+            the data. Finding those gaps is manual: somebody goes looking, then chases people individually.</p>
+          <div class="order-slip" style="margin-bottom:12px;">
+            <div class="slip-label">The ask, as it would actually be phrased</div>
+            <code style="font-size:14px;">Show me every active plan in this segment with overdue actions, missing
+              owners, or no update in the last month.</code>
+          </div>
+          <p style="margin:0 0 12px;">Exceptions surfaced in seconds instead of found by hand. Longer term it could
+            chase people directly, but simply surfacing the gaps is most of the gain.</p>
+          <p style="margin:0;">Note the shape: this one has no client-facing output at all, which makes it one of
+            the safest possible places to start.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:18px;border-color:rgba(140,47,74,.34);background:rgba(140,47,74,.06);">
+      <div class="card-body" style="font-size:15px;">One pulls scattered context into a single answer. The other
+        finds the exceptions nobody has time to look for. Between them they cover most of what is worth building
+        first — and both depend on exactly one thing, which is whether the workflow can reach the records, the
+        numbers and the mailbox at the same time. That is the next section.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. KNOWLEDGE LAYER ============ -->
+<section id="sec15">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">09 — The thing underneath all of it</div>
+      <h2>Scattered information, brought somewhere it can be reached</h2>
+      <p>Every example above depends on the same thing: the workflow could get to the information it needed. That is
+        the quiet constraint on all of this. Not model quality — reach.</p>
+      <p>A knowledge layer is simply the answer to "where does the truth live, and can it be read?" Shared across the
+        company rather than rebuilt per team, because the same account, the same customer and the same history show
+        up in half a dozen different people's work.</p>
+    </div>
+    <div class="chain">
+      <span>CRM</span><span>Data warehouse</span><span>Document storage</span><span>Email</span><span>Chat</span>
+    </div>
+    <p class="muted" style="margin-top:14px;font-size:14px;">Those are the minimum. Not a technical specification —
+      a statement about where our work actually lives.</p>
+  </div>
+</section>
+
+<!-- ============ 8b. ITERATION + MEASURING ============ -->
+<section id="sec16">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">08 — The honest part</div>
+      <h2>What a before-and-after leaves out</h2>
+      <p>Both of those look clean written down, which is a problem with writing things down.</p>
+    </div>
+    <div class="grid2" style="align-items:start;">
+      <div class="panel">
+        <div class="card-title">The outreach workflow — two rounds</div>
+        <div class="card-body">The first version did not work. It was too big and too detailed: it carried over
+          extra information that made sense to engineering and made none to the people receiving the message. Too
+          much text, hard to process, confusing format. Two rounds of iteration to fix, and neither of the problems
+          was interesting.</div>
+      </div>
+      <div class="panel">
+        <div class="card-title">The investigation workflow — twenty-plus</div>
+        <div class="card-body">Built first as a script, it went through more than twenty versions and still fought
+          back. Rebuilt with proper context, shared knowledge, defined queries and guard rails already in place, it
+          came together faster and more easily. The model was not the variable. What it could reach was.</div>
+      </div>
+    </div>
+    <p style="margin-top:22px;color:var(--cs-on-dark-secondary);max-width:72ch;">That gap between twenty-plus
+      versions and a handful is the most useful number in this document, and it is the clearest evidence for the
+      knowledge layer described in the section above. The same person building the same workflow twice, and the
+      difference was how much the thing already knew before it started.</p>
+    <p style="color:var(--cs-on-dark-secondary);max-width:72ch;">What you are really doing in those early rounds is
+      discovering the parts of the procedure you thought you had written down and had not — the assumptions so
+      obvious to you that it never occurred to you to state them. Same lesson as the burger, arriving a second time
+      and costing more. Budget for it. A workflow that saves two days a month is worth a week of getting right, but
+      it is a week, not an afternoon.</p>
+
+    <div style="margin-top:46px;padding-top:36px;border-top:1px solid var(--cs-border);">
+      <h2 style="font-size:clamp(22px,3vw,30px);margin:0 0 16px;">Measuring it without fooling yourself</h2>
+      <p style="color:var(--cs-on-dark-secondary);max-width:72ch;">The usual measure is time saved, and it is
+        almost useless. It is self-reported, it is never checked, and everyone involved has an incentive for the
+        number to be large.</p>
+      <p style="color:var(--cs-on-dark-secondary);max-width:72ch;">A better measure is sitting in front of you every
+        time you use one of these: <strong>how much of the output do you change before it goes out?</strong> On a
+        working workflow that is three or four quick edits per run — small, fast, and material enough to be worth
+        making. Every edit is a place where the instruction did not say what you meant, which makes the number a
+        direct read on the quality of the procedure rather than on the quality of the AI.</p>
+      <div class="grid3" style="margin-top:20px;">
+        <div class="panel"><div class="card-title" style="font-size:16px;color:var(--cs-viz-5);">Falling</div>
+          <div class="card-body">The procedure is improving. Corrections you fed back have made the next run
+            better.</div></div>
+        <div class="panel"><div class="card-title" style="font-size:16px;">Flat and high</div>
+          <div class="card-body">There is a gap you have not identified. You are correcting the same thing
+            repeatedly instead of fixing it once.</div></div>
+        <div class="panel" style="border-color:rgba(201,144,46,.3);"><div class="card-title" style="font-size:16px;color:var(--cs-viz-3);">Rising</div>
+          <div class="card-body">Something underneath has changed and nobody noticed. This is the early warning for
+            the rot described above, and it shows up here first.</div></div>
+      </div>
+      <p style="margin-top:20px;color:var(--cs-on-dark-muted);max-width:72ch;font-size:14.5px;">One thing this will
+        not tell you is whether the workflow was worth building at all. That is frequency multiplied by the time
+        each run takes, set against the time it took to build and will take to maintain.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10. WHO OWNS THIS ============ -->
+<section id="sec17">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">10 — At scale</div>
+      <h2>What happens when there are forty of these</h2>
+      <p>Everything above is written for one person and one task, which is the right place to start and the wrong
+        place to stop. The problems change shape once workflows multiply: who writes them, who maintains them when
+        the author moves team, whether two departments have quietly built the same thing twice, and what happens the
+        first time one produces something wrong and reaches a client. None of those are technology questions, and
+        none get easier by being ignored until they arrive.</p>
+    </div>
+    <div class="grid2">
+      <div class="panel">
+        <div class="card-title">Central</div>
+        <div class="card-body">One team builds and maintains workflows for everyone. Consistent, reviewable, safe —
+          and a queue. It also concentrates the knowledge in the place furthest from the work, which is precisely
+          the wrong place for it.</div>
+      </div>
+      <div class="panel">
+        <div class="card-title">Embedded</div>
+        <div class="card-body">Each department builds its own. Fast, close to the work, immediately relevant. It
+          also produces duplication, uneven quality, and no shared standard for what a good procedure looks
+          like.</div>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:18px;border-color:rgba(140,47,74,.4);background:rgba(140,47,74,.07);">
+      <div class="card-title" style="color:var(--cs-viz-5);">Embedded, with a central specialist function</div>
+      <div class="card-body" style="font-size:15px;">Neither model works alone. The procedures have to be written by
+        the people who run the work, because that is where the knowledge is and no central team can extract it
+        faster than the people holding it can write it down. What belongs in one place is everything around the
+        procedures: the standards, the shared knowledge layer, the review of anything client-facing, and the
+        enablement that makes the first attempt survivable. Skills sit with the people who hold them. Support,
+        standards and reach sit centrally.</div>
+    </div>
+    <p style="margin-top:22px;color:var(--cs-on-dark-secondary);max-width:72ch;">Whichever model you land on, decide
+      it deliberately. The default is that it happens by accident, department by department — and by the time anyone
+      looks up there are forty workflows, no register of what exists, and nobody who can say which of them still
+      work.</p>
+  </div>
+</section>
+
+<!-- ============ 7. OBJECTIONS ============ -->
+<section id="sec18">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">05 — The four things people say next</div>
+      <h2>Pick the one you are actually thinking</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="obj" onclick="this.classList.toggle('open')">
+        <div class="q"><span>"Is this going to replace my job?"</span><span class="chev">+</span></div>
+        <div class="a"><p style="margin:0 0 12px;">The honest answer has two halves and you deserve both.</p>
+          <p style="margin:0 0 12px;">The first half: the gathering is going away. Not immediately and not
+            everywhere, but the part of your week spent assembling information so that you can make a decision is
+            the part this is genuinely good at, and it is not coming back. Anyone telling you otherwise is managing
+            you rather than informing you.</p>
+          <p style="margin:0 0 12px;">The second half: the deciding is not going away, and the accountability
+            attached to it cannot go anywhere. Software cannot be answerable for an outcome. It cannot be asked why,
+            it cannot be held to it, and it cannot carry the consequence. All of that stays with a person, which
+            means the decision it attaches to stays with a person too.</p>
+          <p style="margin:0;">What changes is the ratio. If you currently spend most of your week gathering and a
+            little of it deciding, that inverts. Whether that is a better job or a worse one depends largely on
+            which half you got into this work for.</p></div>
+      </div>
+      <div class="obj" onclick="this.classList.toggle('open')">
+        <div class="q"><span>"My task needs judgment."</span><span class="chev">+</span></div>
+        <div class="a">It does, and the judgment stays yours. What gets handed over is the gathering that happens
+          before the judgment — the reading, the cross-checking, the hunting through four systems for the one number
+          you needed. You still make the call. You just arrive at it with everything already in front of you.</div>
+      </div>
+      <div class="obj" onclick="this.classList.toggle('open')">
+        <div class="q"><span>"Every case is different."</span><span class="chev">+</span></div>
+        <div class="a">Different inputs, same procedure. If every case were truly different you could not train
+          anyone to do this job. You do train people. Therefore there is a procedure — it is just living in your head
+          instead of on paper.</div>
+      </div>
+      <div class="obj" onclick="this.classList.toggle('open')">
+        <div class="q"><span>"I would have to check the output anyway."</span><span class="chev">+</span></div>
+        <div class="a">Yes. That is the design, not a flaw in it. Checking a draft takes minutes. Producing that
+          draft took hours. The whole trade is moving your time from production to review — and review is where your
+          experience is worth the most anyway.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11. HOW TO START ============ -->
+<section id="sec19">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">11 — How do I start</div>
+      <h2>Start by thinking differently about Monday</h2>
+      <p>There is no form to fill in. The first step is a change in how you look at your own week.</p>
+    </div>
+    <ol class="start-list">
+      <li>Look at the processes you run today — the recurring ones, the ones you would describe as admin, the ones
+        you dread.</li>
+      <li>Against what you have just read, ask which of them fit. Where is the decision? Where is the gathering?</li>
+      <li>Pick the one that is most obviously mostly-gathering. That is your candidate.</li>
+      <li>If you want help turning it into something real, ask. That part is not the hard part.</li>
+    </ol>
+    <p style="margin-top:26px;color:var(--cs-on-dark-secondary);max-width:68ch;">The point of this document was never
+      to sell you a tool. It was to change what you notice. Once you start seeing the gathering as separate from the
+      deciding, you will not be able to stop seeing it — and that is the whole beginning.</p>
+    <div class="panel" style="margin-top:34px;border-color:rgba(140,47,74,.42);background:rgba(140,47,74,.07);">
+      <div class="eyebrow" style="color:var(--cs-viz-5);margin-bottom:12px;">The whole argument in one place</div>
+      <p style="font-size:16.5px;line-height:1.65;color:var(--cs-on-dark);margin:0 0 14px;">Get the right context in
+        front of the right question. Be precise about what problem is being solved and what outcome is needed. Then
+        execute — with one agent or several working together, which matters far less than people think.</p>
+      <p style="margin:0;color:var(--cs-on-dark-secondary);font-size:15px;">The hard part was never the execution.
+        It is that most of us have never broken the decision down or written it out — which is why the work cannot
+        be handed over, why it cannot be taught quickly, and why it leaves the building when we do.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="margin-top:0;">AI adoption · agentic workflows for non-engineering roles · September 2026</p>
+    <p style="margin:0 0 6px;color:var(--cs-on-dark-secondary);">Created and authored by <strong>Ivan Rainovski</strong>.</p>
+    <!-- 🤖 Co-Authored with Claude -->
+    <p style="margin:0 0 14px;">🤖 Co-Authored with Claude</p>
+    <p style="margin:0;font-size:12.5px;">Licensed under
+      <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener" target="_blank">CC BY 4.0</a>.
+      You may share and adapt this work, including commercially, provided you credit the author.</p>
+  </div>
+</footer>
+
+<script>
+/* ---------- ROUND 1: ambiguous, always fails ---------- */
+function r1pick(sauce){
+  var box = document.getElementById('box1');
+  var map = {ketchup:'l-ketchup', mayo:'l-mayo', mustard:'l-mustard'};
+  var el = document.createElement('div');
+  el.className = 'layer ' + map[sauce];
+  /* insert the sauce under the top bun */
+  box.insertBefore(el, box.children[1]);
+  var btns = document.querySelectorAll('#choices1 .choice');
+  for (var i=0;i<btns.length;i++){ btns[i].disabled = true; }
+  setTimeout(function(){ document.getElementById('v1').classList.remove('hidden'); }, 450);
+}
+
+/* ---------- ROUND 2: clear, revealed only after round 1 fails ---------- */
+var r2seq = [];
+function startR2(){
+  var r2 = document.getElementById('r2');
+  r2.classList.remove('hidden');
+  r2.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function r2pick(item){
+  var box = document.getElementById('box2');
+  var hint = document.getElementById('r2hint');
+  var map = {ketchup:'l-ketchup', mayo:'l-mayo', mustard:'l-mustard'};
+
+  if (item === 'mustard'){
+    hint.textContent = 'The procedure says skip mustard. Skipping is an instruction too — leave it out.';
+    hint.style.color = 'var(--cs-viz-6)';
+    return;
+  }
+  if (item === 'close'){
+    if (r2seq.length < 2){
+      hint.textContent = 'Not yet — the sauces go on before the bun closes. Order is part of the instruction.';
+      hint.style.color = 'var(--cs-viz-6)';
+      return;
+    }
+    var top = document.createElement('div');
+    top.className = 'layer l-buntop';
+    box.insertBefore(top, box.children[0]);
+    var all = document.querySelectorAll('#choices2 .choice');
+    for (var j=0;j<all.length;j++){ all[j].disabled = true; }
+    hint.textContent = 'Order complete.';
+    hint.style.color = 'var(--cs-on-dark-muted)';
+    setTimeout(function(){ document.getElementById('v2').classList.remove('hidden'); }, 400);
+    return;
+  }
+  var expected = r2seq.length === 0 ? 'ketchup' : 'mayo';
+  if (item !== expected){
+    hint.textContent = 'Ketchup first, then mayo. The sequence is written down for a reason.';
+    hint.style.color = 'var(--cs-viz-6)';
+    return;
+  }
+  var el = document.createElement('div');
+  el.className = 'layer ' + map[item];
+  box.insertBefore(el, box.children[0]);
+  r2seq.push(item);
+  document.getElementById('c-' + item).disabled = true;
+  hint.style.color = 'var(--cs-on-dark-muted)';
+  hint.textContent = r2seq.length === 1 ? 'Ketchup on. Next: mayo.' : 'Mayo on. Mustard is skipped — close the bun.';
+}
+
+/* ---------- ANATOMY STEPPER ---------- */
+var steps = [
+  {t:'Trigger', d:'What starts the workflow. A schedule ("every Tuesday"), an event (an email lands, a meeting gets booked), or someone simply asking for it. Nothing happens until a trigger fires.'},
+  {t:'Grounding/Context', d:'What it is allowed to read. Real, controlled access to where the truth actually lives — a CRM, a project tracker, an inbox, a transcript — instead of guessing. This is what makes the output specific instead of generic.'},
+  {t:'The skill', d:'The written-down procedure. Instructions, saved once, that say exactly how we do this particular task. Writing it down turns one person\u2019s know-how into something anyone can reuse. This is the reusable asset — not the AI.'},
+  {t:'Execution', d:'The work getting done. It follows the skill against what it was grounded in and produces a first version: a summary, a draft reply, a flagged list of accounts. This is the part that used to take hours.'},
+  {t:'Human gate', d:'A person checks it first. Nothing is sent, posted or filed automatically. Someone reviews, adjusts or rejects the output before it goes anywhere. This is the step that makes the whole thing safe to run.'},
+  {t:'Write-back', d:'Where the result lands. Once approved, it is saved or sent to the real system of record — a CRM note, a Slack message, an updated card. Any edits the person made also improve the skill for next time.',
+   w:'<strong>Worked example — the burger.</strong> <b>Trigger</b> an order comes in &rarr; <b>Grounding/Context</b> the ingredients in front of you &rarr; <b>Skill</b> "ketchup, then mayo, skip mustard" &rarr; <b>Execution</b> you build it &rarr; <b>Human gate</b> someone checks before it leaves the counter &rarr; <b>Write-back</b> the order is marked done.'}
+];
+var si = 0;
+function renderStep(){
+  var s = steps[si];
+  document.getElementById('s-num').textContent = 'Step ' + (si+1) + ' of 6';
+  document.getElementById('s-title').textContent = s.t;
+  document.getElementById('s-detail').textContent = s.d;
+  var w = document.getElementById('s-worked');
+  if (s.w){ w.innerHTML = s.w; w.classList.remove('hidden'); } else { w.classList.add('hidden'); }
+  document.getElementById('s-pos').textContent = (si+1) + ' / 6';
+  document.getElementById('s-prev').disabled = si === 0;
+  document.getElementById('s-next').textContent = si === 5 ? 'Back to start' : 'Next →';
+  var nodes = document.querySelectorAll('#track .node');
+  for (var i=0;i<nodes.length;i++){
+    nodes[i].className = 'node' + (i === si ? ' active' : (i < si ? ' done' : ''));
+  }
+}
+function stepMove(d){
+  if (d === 1 && si === 5){ si = 0; } else { si = Math.max(0, Math.min(5, si + d)); }
+  renderStep();
+}
+(function buildTrack(){
+  var t = document.getElementById('track');
+  for (var i=0;i<steps.length;i++){
+    var n = document.createElement('div');
+    n.className = 'node';
+    n.textContent = steps[i].t;
+    (function(idx){ n.onclick = function(){ si = idx; renderStep(); }; })(i);
+    t.appendChild(n);
+  }
+  renderStep();
+})();
+
+/* ---------- QUALIFY TEST ---------- */
+var qs = [
+  'Does this task end in a decision?',
+  'Do you do it often enough to care?',
+  'Is everything you look at written down somewhere a system could reach?',
+  'Could a new starter do it from your notes?',
+  'Does the result get recorded or sent somewhere?',
+  'Would a person still check it before it goes out?'
+];
+var qi = 0, qa = [];
+function renderQ(){
+  document.getElementById('q-count').textContent = 'Question ' + (qi+1) + ' of 6';
+  document.getElementById('q-text').textContent = qs[qi];
+  var d = document.getElementById('q-dots');
+  d.innerHTML = '';
+  for (var i=0;i<6;i++){
+    var s = document.createElement('div');
+    s.className = 'dot' + (i === qi ? ' on' : (i < qi ? ' seen' : ''));
+    d.appendChild(s);
+  }
+}
+function qAnswer(v){
+  qa[qi] = v;
+  if (qi < 5){ qi++; renderQ(); } else { qVerdict(); }
+}
+function qVerdict(){
+  var tag, title, body;
+  if (!qa[0]){
+    tag = 'Verdict'; title = 'This is a step, not a task.';
+    body = 'Without a decision at the end there is nothing to hand over — you are looking at one part of something larger. Zoom out to the thing this feeds into, and run the six questions again on that.';
+  } else if (!qa[1]){
+    tag = 'Verdict'; title = 'Real, but not worth it yet.';
+    body = 'The shape is right. The frequency is not. Automating something you do twice a year costs more than it returns. Park it and pick something you do weekly — or look for the version of this that happens often.';
+  } else if (!qa[2] || !qa[3]){
+    tag = 'Verdict'; title = 'This needs writing down first.';
+    body = 'That is a more useful answer than a no. Either the information lives somewhere nothing can reach, or the procedure only exists in your head. Both are fixable, and both are worth fixing regardless of whether anything gets automated — the burger round you just failed was exactly this problem.';
+  } else if (!qa[5]){
+    tag = 'Red flag'; title = 'Qualifies, but it needs a human gate.';
+    body = 'Everything else fits. What is missing is the review step, and that is not optional — nothing should act unwatched. Build in the approval before you build anything else, and this becomes a strong candidate.';
+  } else if (!qa[4]){
+    tag = 'Verdict'; title = 'Almost — the result has nowhere to land.';
+    body = 'If the output is not recorded or sent anywhere, the workflow has no write-back and the value leaks away. Decide where the result belongs first. Once it has a home, this qualifies.';
+  } else {
+    tag = 'Verdict'; title = 'This qualifies.';
+    body = 'A real decision, often enough to matter, information a system can reach, a procedure that could be written down, somewhere for the result to land, and a person checking before it goes out. All six parts are present. This is a candidate — write it down and take it to someone.';
+  }
+  document.getElementById('q-verdict-tag').textContent = tag;
+  document.getElementById('q-verdict-title').textContent = title;
+  document.getElementById('q-verdict-body').textContent = body;
+  document.getElementById('q-live').classList.add('hidden');
+  document.getElementById('q-result').classList.remove('hidden');
+}
+function qReset(){
+  qi = 0; qa = [];
+  document.getElementById('q-result').classList.add('hidden');
+  document.getElementById('q-live').classList.remove('hidden');
+  renderQ();
+}
+renderQ();
+
+/* ---------- GROUNDING GAME ---------- */
+var sources = [
+  {id:'planhat', nm:'The account record in the CRM', hint:'Contract, renewal date, open issues', good:true},
+  {id:'call',    nm:'Transcript of the last call',   hint:'What was actually promised', good:true},
+  {id:'email',   nm:'The email thread with the client', hint:'What has changed since', good:true},
+  {id:'numbers', nm:"Last quarter's performance numbers", hint:'How the account is actually doing', good:true},
+  {id:'web',     nm:'A general web search',          hint:'Public information about the industry', good:false},
+  {id:'hr',      nm:"The client contact's HR file",  hint:'Personnel records', good:false, flag:true},
+  {id:'notes',   nm:'Your personal notes from six months ago', hint:'Unstructured, and old', good:false, stale:true}
+];
+var picked = {};
+(function buildSources(){
+  var wrap = document.getElementById('src-list');
+  for (var i=0;i<sources.length;i++){
+    var s = sources[i];
+    var d = document.createElement('div');
+    d.className = 'src';
+    d.id = 'src-' + s.id;
+    d.innerHTML = '<div class="tick"></div><div class="nm">' + s.nm + '<span class="hint">' + s.hint + '</span></div>';
+    (function(id, node){
+      node.onclick = function(){
+        picked[id] = !picked[id];
+        node.classList.toggle('on', !!picked[id]);
+        node.querySelector('.tick').textContent = picked[id] ? '✓' : '';
+      };
+    })(s.id, d);
+    wrap.appendChild(d);
+  }
+})();
+function runGrounding(){
+  var out = document.getElementById('brief-out');
+  var note = document.getElementById('brief-note');
+  var core = ['planhat','call','email','numbers'];
+  var got = 0;
+  for (var i=0;i<core.length;i++){ if (picked[core[i]]) got++; }
+  var n = Object.keys(picked).filter(function(k){ return picked[k]; }).length;
+
+  note.classList.remove('hidden');
+  out.style.color = 'var(--cs-on-dark-secondary)';
+
+  if (n === 0){
+    out.textContent = 'Nothing selected. Pick at least one source.';
+    note.classList.add('hidden');
+    return;
+  }
+  if (picked.hr){
+    out.innerHTML = '<em style="color:var(--cs-viz-3);">Stopped before generating.</em>';
+    note.innerHTML = '<strong style="color:var(--cs-viz-3);">The HR file.</strong> Nothing in this task needed it. ' +
+      'Access is a decision somebody has to make deliberately, and "it was available" is not a reason. This is not ' +
+      'a scolding — it is the red flag doing its job. Untick it and try again.';
+    return;
+  }
+  if (got === 0 && picked.web){
+    out.innerHTML = 'Acme operates in a competitive sector facing evolving regulatory pressures. Key priorities ' +
+      'likely include brand integrity and digital presence. Recommend exploring opportunities to deepen the ' +
+      'partnership going forward.';
+    note.innerHTML = '<strong>Fluent, confident, useless.</strong> Not one sentence there is about Acme specifically. ' +
+      'This is exactly what a chatbot produces, and it is why access matters more than cleverness.';
+    return;
+  }
+  if (got <= 1){
+    out.innerHTML = 'Acme is an active account. The relationship appears stable. Suggest reviewing recent activity ' +
+      'ahead of the call and confirming current priorities with the client.';
+    note.innerHTML = '<strong>Too thin to be useful.</strong> With one source it can only generalise — and it will do ' +
+      'so confidently. Fluency is not the same as knowing anything. Add more of the core four.';
+    return;
+  }
+  if (got >= 3 && picked.notes){
+    out.innerHTML = 'Renewal falls in eleven weeks. Two escalations open since the last call, both on scope. ' +
+      'Service volume down 14% quarter on quarter. <span style="color:var(--cs-viz-6);">Primary contact listed ' +
+      'as Dan — he left in March.</span>';
+    note.innerHTML = '<strong>Nearly right, quietly wrong.</strong> The stale notes put a name in the brief that has ' +
+      'been wrong for six months. Missing data is obvious. Old data is not — it looks like every other line. That is ' +
+      'why grounding/context is about what is <em>current</em>, not just what is available.';
+    return;
+  }
+  if (got >= 3){
+    out.innerHTML = 'Renewal falls in eleven weeks. Two escalations open since the last call, both on scope. ' +
+      'Service volume down 14% quarter on quarter, driven by one area. On the last call we committed to ' +
+      'a revised plan by month end — still outstanding.';
+    note.innerHTML = '<strong>Now it is a brief.</strong> Specific enough to walk into a room with. Nothing here came ' +
+      'from cleverness — every line came from a source you granted. That is grounding/context: not more access, the right access.';
+    return;
+  }
+  out.innerHTML = 'Renewal falls in eleven weeks. Some open activity on the account. Recommend confirming status ' +
+    'before the call.';
+  note.innerHTML = '<strong>Halfway.</strong> Partial grounding/context gives partial answers — and the gaps do not announce ' +
+    'themselves. Try the four core sources together.';
+}
+
+/* ---------- HUMAN GATE GAME ---------- */
+var drafts = [
+  {to:'To: Acme — renewal reminder',
+   txt:'Hi Priya, your renewal date is coming up in eleven weeks. I have pulled together the summary for the last quarter and will send it ahead of our call on Thursday.',
+   bad:false},
+  {to:'To: Northwind — escalation update',
+   txt:'Hi Tom, the two open escalations on scope are both with the delivery team. I will confirm resolution dates on Thursday rather than guess at them now.',
+   bad:false},
+  {to:'To: Halvorsen Group — quarterly numbers',
+   txt:'Hi Lena, service volume grew 22% this quarter, our strongest yet on your account. Delighted with the trajectory here.',
+   bad:true,
+   why:'The account note on this same brief says volume fell. The draft reversed the direction of the number and then celebrated it. Fluent, specific, and completely wrong — which is precisely the kind of error that reads as confident rather than suspicious.'},
+  {to:'To: Castellane — revised plan',
+   txt:'Hi Marc, the revised plan is with me for a final check. You will have it by the end of the month as agreed on our last call.',
+   bad:false}
+];
+var gateDone = false;
+(function buildGate(){
+  var wrap = document.getElementById('gate-cards');
+  for (var i=0;i<drafts.length;i++){
+    var d = document.createElement('div');
+    d.className = 'gate-card';
+    d.id = 'gate-' + i;
+    d.innerHTML = '<div class="to">' + drafts[i].to + '</div><div class="txt">' + drafts[i].txt + '</div>';
+    (function(idx){ d.onclick = function(){ gatePick(idx); }; })(i);
+    wrap.appendChild(d);
+  }
+})();
+function gatePick(i){
+  if (gateDone) return;
+  gateDone = true;
+  var v = document.getElementById('gate-verdict');
+  for (var k=0;k<drafts.length;k++){
+    var el = document.getElementById('gate-' + k);
+    el.classList.add('locked');
+    if (drafts[k].bad && k !== i) el.classList.add('shown-bad');
+  }
+  var chosen = document.getElementById('gate-' + i);
+  if (drafts[i].bad){
+    chosen.classList.add('picked-bad');
+    v.className = 'verdict win';
+    v.innerHTML = '<h4>Caught it.</h4><p style="margin:0 0 12px;">' + drafts[i].why + '</p>' +
+      '<p style="margin:0;">How long did that take you? Under a minute, probably. Producing those four drafts by ' +
+      'hand would have taken most of an afternoon. That gap — minutes to review, hours to produce — is the entire ' +
+      'trade this document is describing.</p>';
+  } else {
+    chosen.classList.add('picked-ok');
+    var badIdx = 2;
+    v.className = 'verdict fail';
+    v.innerHTML = '<h4>That one was fine. The Halvorsen draft is the problem.</h4>' +
+      '<p style="margin:0 0 12px;">' + drafts[badIdx].why + '</p>' +
+      '<p style="margin:0;">It was catchable, and you would have caught it with the account note open in front of ' +
+      'you. That is not a reason to distrust the work — it is the reason the gate exists. Nothing goes out until ' +
+      'somebody with context has looked at it.</p>';
+  }
+  v.classList.remove('hidden');
+}
+
+/* ---------- KEYBOARD ACCESSIBILITY ---------- */
+(function makeAccessible(){
+  var sel = '.src, .gate-card, .obj, .node';
+  var nodes = document.querySelectorAll(sel);
+  for (var i=0;i<nodes.length;i++){
+    (function(el){
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex','0');
+      if (!el.hasAttribute('role')) el.setAttribute('role','button');
+      el.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          el.click();
+        }
+      });
+    })(nodes[i]);
+  }
+})();
+
+
+/* ---------- scroll progress ---------- */
+(function(){
+  var bar=document.getElementById('progress');
+  if(!bar) return;
+  function upd(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?(window.scrollY/h)*100:0)+'%';
+  }
+  window.addEventListener('scroll',upd,{passive:true});
+  window.addEventListener('resize',upd);
+  upd();
+})();
+
+/* ---------- BEFORE / AFTER ---------- */
+function showHero(n){
+  document.getElementById('hero1').classList.toggle('hidden', n !== 1);
+  document.getElementById('hero2').classList.toggle('hidden', n !== 2);
+  document.getElementById('t-h1').className = n === 1 ? 'on' : '';
+  document.getElementById('t-h2').className = n === 2 ? 'on' : '';
+}
+</script>
+</body>
+</html>
